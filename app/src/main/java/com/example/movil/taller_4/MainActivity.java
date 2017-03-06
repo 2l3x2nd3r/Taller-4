@@ -1,15 +1,29 @@
 package com.example.movil.taller_4;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<Project> projects = new ArrayList<Project>();
+    ProjectAdapter pa = new ProjectAdapter(this, projects);
+    private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,15 +32,77 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        projects.add(new Project(0,0,0,0,"Projecto 1",0));
+        projects.add(new Project(0,0,0,0,"Projecto 2",0));
+        projects.add(new Project(0,0,0,0,"Projecto 3",0));
+        projects.add(new Project(0,0,0,0,"Projecto 4",0));
+
+        lv = (ListView) findViewById(R.id.lv);
+        lv.setDivider(null);
+        lv.setAdapter(pa);
+    }
+
+    public void createNewProject(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Ingrese el nombre del Proyecto");
+
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        builder.setPositiveButton("Crear", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(DialogInterface dialog, int which) {
+                projects.add(new Project(0,0,0,0,input.getText().toString(),0));
+                pa.setData(projects);
+                ((ProjectAdapter) lv.getAdapter()).notifyDataSetChanged();
             }
         });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
+
+    public void editProject(View view){
+        int position = getProjectPosition(view);
+
+        Intent i = new Intent(this, Project_show.class);
+        i.putExtra("project", projects.get(position));
+
+        startActivityForResult(i, position);
+    }
+
+    public void showProject(View view){
+        int position = getProjectPosition(view);
+
+        Intent i = new Intent(this, Project_show.class);
+        i.putExtra("project", projects.get(position));
+
+        startActivity(i);
+    }
+
+    public int getProjectPosition(View view){
+        TextView tv = (TextView) view.findViewById(R.id.tvRow);
+        Toast.makeText(this, tv.getText().toString(), Toast.LENGTH_SHORT).show();
+        return Integer.parseInt(tv.getText().toString().split(" ")[1]) - 1;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Project project;
+
+        if(resultCode == RESULT_OK){
+            projects.set(requestCode, (Project) data.getSerializableExtra("project"));
+            project = projects.get(requestCode);
+        }
+
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

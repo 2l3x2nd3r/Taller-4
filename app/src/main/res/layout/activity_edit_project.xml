@@ -128,7 +128,7 @@
             android:padding="10dp">
 
             <TextView
-                android:text="TextView"
+                android:text="Definitiva"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Definitiva"

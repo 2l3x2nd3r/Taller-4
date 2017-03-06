@@ -37,10 +37,10 @@ public class edit_project extends AppCompatActivity {
 
         tvp.setText("Nombre del Proyecto: " + project.getName());
         grade.setText("" + project.getGrade());
-        et1.setText("" + project.getNote1());
-        et2.setText("" + project.getNote2());
-        et3.setText("" + project.getNote3());
-        et4.setText("" + project.getNote4());
+        et1.setHint("" + project.getNote1());
+        et2.setHint("" + project.getNote2());
+        et3.setHint("" + project.getNote3());
+        et4.setHint("" + project.getNote4());
     }
 
     public void calculate(View view) {

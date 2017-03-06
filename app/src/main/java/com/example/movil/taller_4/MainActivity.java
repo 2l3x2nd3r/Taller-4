@@ -92,14 +92,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Project project;
-
         if(resultCode == RESULT_OK){
             projects.set(requestCode, (Project) data.getSerializableExtra("project"));
-            project = projects.get(requestCode);
         }
-
-
     }
 
 

@@ -15,6 +15,7 @@ public class Project_show extends AppCompatActivity {
     TextView tv2;
     TextView tv3;
     TextView tv4;
+    TextView grade;
 
     Project project;
 
@@ -28,15 +29,17 @@ public class Project_show extends AppCompatActivity {
         tv2 = (TextView) findViewById(R.id.tvn2);
         tv3 = (TextView) findViewById(R.id.tvn3);
         tv4 = (TextView) findViewById(R.id.tvn4);
+        grade = (TextView) findViewById(R.id.grade);
 
         Intent i = getIntent();
 
         project = (Project) i.getSerializableExtra("project");
 
         tvp.setText("Nombre del Proyecto: " + project.getName());
-        tv1.setText(String.valueOf(project.getNote1()));
-        tv2.setText(String.valueOf(project.getNote2()));
-        tv3.setText(String.valueOf(project.getNote3()));
-        tv4.setText(String.valueOf(project.getNote4()));
+        tv1.setText("" + project.getNote1());
+        tv2.setText("" + project.getNote2());
+        tv3.setText("" + project.getNote3());
+        tv4.setText("" + project.getNote4());
+        grade.setText("" + project.getGrade());
     }
 }

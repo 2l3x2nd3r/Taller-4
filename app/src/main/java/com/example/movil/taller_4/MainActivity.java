@@ -68,9 +68,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void editProject(View view){
-        int position = getProjectPosition(view);
-
-        Intent i = new Intent(this, Project_show.class);
+        int position = (Integer) view.getTag();
+        Intent i = new Intent(this, edit_project.class);
         i.putExtra("project", projects.get(position));
 
         startActivityForResult(i, position);

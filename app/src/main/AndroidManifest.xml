@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Project_show"></activity>
+        <activity android:name=".Project_show" />
+        <activity android:name=".edit_project"></activity>
     </application>
 
 </manifest>

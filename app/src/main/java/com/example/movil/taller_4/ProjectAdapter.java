@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -57,8 +58,10 @@ public class ProjectAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.row, null);
         }
 
+        Button btn = (Button) view.findViewById(R.id.btnRow);
         TextView tv = (TextView) view.findViewById(R.id.tvRow);
         tv.setText(text);
+        btn.setTag(i);
 
         return view;
     }

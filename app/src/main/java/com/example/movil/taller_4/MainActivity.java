@@ -76,18 +76,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showProject(View view){
-        int position = getProjectPosition(view);
+        int position = (Integer) view.getTag();
 
         Intent i = new Intent(this, Project_show.class);
         i.putExtra("project", projects.get(position));
 
         startActivity(i);
-    }
-
-    public int getProjectPosition(View view){
-        TextView tv = (TextView) view.findViewById(R.id.tvRow);
-        Toast.makeText(this, tv.getText().toString(), Toast.LENGTH_SHORT).show();
-        return Integer.parseInt(tv.getText().toString().split(" ")[1]) - 1;
     }
 
     @Override

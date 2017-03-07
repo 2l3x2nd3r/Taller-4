@@ -1,6 +1,9 @@
 package com.example.movil.taller_4;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v7.widget.CardView;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,13 +57,14 @@ public class ProjectAdapter extends BaseAdapter {
 
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
             view = inflater.inflate(R.layout.row, null);
         }
 
         Button btn = (Button) view.findViewById(R.id.btnRow);
         TextView tv = (TextView) view.findViewById(R.id.tvRow);
+        CardView card = (CardView) view.findViewById(R.id.cardRow);
         tv.setText(text);
+        card.setTag(i);
         btn.setTag(i);
 
         return view;
